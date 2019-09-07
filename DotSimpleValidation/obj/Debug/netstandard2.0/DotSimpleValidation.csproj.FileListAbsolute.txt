@@ -1,0 +1,9 @@
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation\bin\Debug\netstandard2.0\DotSimpleValidation.deps.json
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation\bin\Debug\netstandard2.0\DotSimpleValidation.dll
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation\bin\Debug\netstandard2.0\DotSimpleValidation.pdb
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation\obj\Debug\netstandard2.0\DotSimpleValidation.csprojAssemblyReference.cache
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation\obj\Debug\netstandard2.0\DotSimpleValidation.csproj.CoreCompileInputs.cache
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation\obj\Debug\netstandard2.0\DotSimpleValidation.AssemblyInfoInputs.cache
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation\obj\Debug\netstandard2.0\DotSimpleValidation.AssemblyInfo.cs
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation\obj\Debug\netstandard2.0\DotSimpleValidation.dll
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation\obj\Debug\netstandard2.0\DotSimpleValidation.pdb

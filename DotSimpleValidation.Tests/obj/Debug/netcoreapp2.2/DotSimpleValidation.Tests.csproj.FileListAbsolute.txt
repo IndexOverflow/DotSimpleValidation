@@ -1,0 +1,17 @@
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.dll
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.pdb
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\bin\Debug\netcoreapp2.2\nunit.engine.netstandard.dll
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\bin\Debug\netcoreapp2.2\DotSimpleValidation.Tests.deps.json
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\bin\Debug\netcoreapp2.2\DotSimpleValidation.Tests.runtimeconfig.json
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\bin\Debug\netcoreapp2.2\DotSimpleValidation.Tests.runtimeconfig.dev.json
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\bin\Debug\netcoreapp2.2\DotSimpleValidation.Tests.dll
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\bin\Debug\netcoreapp2.2\DotSimpleValidation.Tests.pdb
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\bin\Debug\netcoreapp2.2\DotSimpleValidation.dll
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\bin\Debug\netcoreapp2.2\DotSimpleValidation.pdb
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\obj\Debug\netcoreapp2.2\DotSimpleValidation.Tests.csprojAssemblyReference.cache
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\obj\Debug\netcoreapp2.2\DotSimpleValidation.Tests.csproj.CoreCompileInputs.cache
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\obj\Debug\netcoreapp2.2\DotSimpleValidation.Tests.AssemblyInfoInputs.cache
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\obj\Debug\netcoreapp2.2\DotSimpleValidation.Tests.AssemblyInfo.cs
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\obj\Debug\netcoreapp2.2\DotSimpleValidation.Tests.csproj.CopyComplete
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\obj\Debug\netcoreapp2.2\DotSimpleValidation.Tests.dll
+C:\Users\kgaute\Src\DotSimpleValidation\DotSimpleValidation.Tests\obj\Debug\netcoreapp2.2\DotSimpleValidation.Tests.pdb

@@ -1,0 +1,17 @@
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.dll
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.pdb
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\bin\Debug\netcoreapp2.2\nunit.engine.netstandard.dll
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\bin\Debug\netcoreapp2.2\SimpleValidation.Tests.deps.json
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\bin\Debug\netcoreapp2.2\SimpleValidation.Tests.runtimeconfig.json
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\bin\Debug\netcoreapp2.2\SimpleValidation.Tests.runtimeconfig.dev.json
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\bin\Debug\netcoreapp2.2\SimpleValidation.Tests.dll
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\bin\Debug\netcoreapp2.2\SimpleValidation.Tests.pdb
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\bin\Debug\netcoreapp2.2\SimpleValidation.dll
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\bin\Debug\netcoreapp2.2\SimpleValidation.pdb
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\obj\Debug\netcoreapp2.2\SimpleValidation.Tests.csprojAssemblyReference.cache
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\obj\Debug\netcoreapp2.2\SimpleValidation.Tests.csproj.CoreCompileInputs.cache
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\obj\Debug\netcoreapp2.2\SimpleValidation.Tests.AssemblyInfoInputs.cache
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\obj\Debug\netcoreapp2.2\SimpleValidation.Tests.AssemblyInfo.cs
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\obj\Debug\netcoreapp2.2\SimpleValidation.Tests.csproj.CopyComplete
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\obj\Debug\netcoreapp2.2\SimpleValidation.Tests.dll
+C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation.Tests\obj\Debug\netcoreapp2.2\SimpleValidation.Tests.pdb

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotSimpleValidation", "DotSimpleValidation\DotSimpleValidation.csproj", "{869E438E-2DA3-4D53-896B-F118E3374BEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotSimpleValidation.Tests", "DotSimpleValidation.Tests\DotSimpleValidation.Tests.csproj", "{504E5C6E-55AA-4A6E-9B97-3D22371DEA88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{869E438E-2DA3-4D53-896B-F118E3374BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{869E438E-2DA3-4D53-896B-F118E3374BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{869E438E-2DA3-4D53-896B-F118E3374BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{869E438E-2DA3-4D53-896B-F118E3374BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{504E5C6E-55AA-4A6E-9B97-3D22371DEA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{504E5C6E-55AA-4A6E-9B97-3D22371DEA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{504E5C6E-55AA-4A6E-9B97-3D22371DEA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{504E5C6E-55AA-4A6E-9B97-3D22371DEA88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
