@@ -1,4 +1,6 @@
 # DotSimpleValidation
+[![DotSimpleValidation](https://img.shields.io/nuget/v/DotSimpleValidation )](https://www.nuget.org/packages/DotSimpleValidation/)
+
 You want validation, but you don't want an entire framework? This tiny project may be of help.
 Meant to be used in constructors it will ensure that your objects don't contain invalid data. 
 Works well with Domain primitives.
