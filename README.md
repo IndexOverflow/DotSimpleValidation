@@ -9,17 +9,24 @@ If a property fails validation the Validator will throw `ValidationException` (w
 
 ### Validation
 ```C#
-private class SomeClass
-{
-    public string ValidDataString { get; }
-    public int ValidNumber { get; }
-    public string SortaOptional { get; }
+using System.Text.RegularExpressions;
+using static DotSimpleValidation.Validators; // If not included you will have to use Validators.{Validator}(...)
 
-    public SomeClass(string data, int aNumber, string message)
-    {                         
-        ValidDataString = data.MustBe(Match(new Regex("([a-zA-Z0-9])")));
-        ValidNumber = aNumber.MustBe(Between<int>(1,10));
-        SortaOptional = message.MustBe(NotNullOrBlank());
+namespace DotSimpleValidation.Tests
+{
+        public class SomeClass
+        {
+            public string ValidDataString { get; }
+            public int ValidNumber { get; }
+            public string SortaOptional { get; }
+
+            public SomeClass(string data, int aNumber, string message)
+            {
+                ValidDataString = data.MustBe(Match(new Regex("([a-zA-Z0-9])")));
+                ValidNumber = aNumber.MustBe(Between<int>(1, 10));
+                SortaOptional = message.MustBe(NotNullOrBlank());
+            }
+        }
     }
 }
 ```
