@@ -12,7 +12,8 @@
 /wwwroot/node_modules
 
 *.DotSettings.user
-./idea
+.idea/
+.idea/.idea.DotSimpleValidation
 
 ### Rider ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
