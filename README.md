@@ -10,7 +10,7 @@ If a property fails validation the Validator will throw `ValidationException` (w
 ### Validation
 ```C#
 using System.Text.RegularExpressions;
-using static DotSimpleValidation.Validators; // If not included you will have to use Validators.{Validator}(...)
+using static DotSimpleValidation.Validators; // using static allows less verbose usage
 
 namespace DotSimpleValidation.Tests
 {
