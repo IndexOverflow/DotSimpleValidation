@@ -10,6 +10,9 @@
 # Common node modules locations
 /node_modules
 /wwwroot/node_modules
+nuget-key
+out
+*.nupkg
 
 *.DotSettings.user
 .idea/

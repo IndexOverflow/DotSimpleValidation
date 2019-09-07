@@ -35,5 +35,25 @@ namespace DotSimpleValidation.Tests
         {
             Assert.Throws<ValidationException>(() => "Aa".MustBe(Equal("Bb")));
         }
+
+        [Test]
+        public void should_not_create_someclass()
+        {
+            Assert.Throws<ValidationException>(() => new SomeClass("okay123", 4, null));
+        }
+
+        private class SomeClass
+        {
+            public string ValidDataString { get; }
+            public int ValidNumber { get; }
+            public string SortaOptional { get; }
+
+            public SomeClass(string data, int aNumber, string message)
+            {
+                ValidDataString = data.MustBe(Match(new Regex("([a-zA-Z0-9])")));
+                ValidNumber = aNumber.MustBe(Between<int>(1, 10));
+                SortaOptional = message.MustBe(NotNullOrBlank());
+            }
+        }
     }
 }

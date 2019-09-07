@@ -71,5 +71,5 @@ namespace DotSimpleValidation
 
             return result as Either<string, TRight>.Right;
         }
-    }
+    }              
 }
