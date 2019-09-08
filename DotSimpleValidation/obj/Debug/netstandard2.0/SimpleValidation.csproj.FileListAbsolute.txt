@@ -1,9 +1,0 @@
-C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation\bin\Debug\netstandard2.0\SimpleValidation.deps.json
-C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation\bin\Debug\netstandard2.0\SimpleValidation.dll
-C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation\bin\Debug\netstandard2.0\SimpleValidation.pdb
-C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation\obj\Debug\netstandard2.0\SimpleValidation.csprojAssemblyReference.cache
-C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation\obj\Debug\netstandard2.0\SimpleValidation.csproj.CoreCompileInputs.cache
-C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation\obj\Debug\netstandard2.0\SimpleValidation.AssemblyInfoInputs.cache
-C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation\obj\Debug\netstandard2.0\SimpleValidation.AssemblyInfo.cs
-C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation\obj\Debug\netstandard2.0\SimpleValidation.dll
-C:\Users\kgaute\Src\DotSimpleValidation\SimpleValidation\obj\Debug\netstandard2.0\SimpleValidation.pdb
