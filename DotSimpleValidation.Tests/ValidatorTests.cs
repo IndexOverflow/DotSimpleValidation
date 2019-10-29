@@ -1,11 +1,25 @@
+using System;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using static DotSimpleValidation.Validators;
 
 namespace DotSimpleValidation.Tests
 {
-    public class ValidationTests
+    public class ValidatorTests
     {
+
+        [Test]
+        public void should_create_uri_with_creatable_using()
+        {
+            Assert.That("https://github.com" == "https://github.com".MustBe(CreatableUsing<Uri>((s => new Uri(s)))));
+        }
+        
+        [Test]
+        public void should_fail_with_creatable_using()
+        {
+            Assert.Throws<ValidationException>(() => "I-AM-NOT-AN-URI".MustBe(CreatableUsing<Uri>((s => new Uri(s)))));
+        }
+        
         [Test]
         public void should_not_manipulate_value()
         {

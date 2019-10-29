@@ -30,6 +30,24 @@ namespace DotSimpleValidation
                 return Either<string, string>.GoLeft($"{value} does not match given pattern in <<caller>>");
             };
         }
+        
+        public static Func<string, Either<string, string>> CreatableUsing<TCreatable>(Func<string, TCreatable> constructor)
+        {
+            return (value) =>
+            {
+
+                try
+                {
+                    constructor(value);
+                    return Either<string, string>.GoRight(value);
+                }
+                catch (Exception e)
+                {
+                    return Either<string, string>.GoLeft($"{value} could not be created using given constructor in <<caller>>, produced ￿\"${e.Message}\"");
+                }
+
+            };
+        }
 
         public static Func<string, Either<string, string>> NotNullOrBlank()
         {
