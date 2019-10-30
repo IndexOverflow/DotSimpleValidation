@@ -16,9 +16,9 @@ namespace DotSimpleValidation.Tests
 {
         public class SomeClass
         {
-            public string ValidDataString { get; }
-            public int ValidNumber { get; }
-            public string SortaOptional { get; }
+            public readonly string ValidDataString;
+            public readonly int ValidNumber;
+            public readonly string SortaOptional;
 
             public SomeClass(string data, int aNumber, string message)
             {
