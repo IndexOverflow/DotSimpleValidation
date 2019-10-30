@@ -11,13 +11,13 @@ namespace DotSimpleValidation.Tests
         [Test]
         public void should_create_uri_with_creatable_using()
         {
-            Assert.That("https://github.com" == "https://github.com".MustBe(CreatableUsing<Uri>((s => new Uri(s)))));
+            Assert.That("https://github.com" == "https://github.com".MustBe(CreatableUsing((s => new Uri(s)))));
         }
         
         [Test]
         public void should_fail_with_creatable_using()
         {
-            Assert.Throws<ValidationException>(() => "I-AM-NOT-AN-URI".MustBe(CreatableUsing<Uri>((s => new Uri(s)))));
+            Assert.Throws<ValidationException>(() => "I-AM-NOT-AN-URI".MustBe(CreatableUsing((s => new Uri(s)))));
         }
         
         [Test]
