@@ -7,5 +7,10 @@ namespace DotSimpleValidation
         public ValidationException(string s) : base(s)
         {
         }
+
+        public ValidationException(string s, Exception e) : base(s, e)
+        {
+            
+        }
     }
 }

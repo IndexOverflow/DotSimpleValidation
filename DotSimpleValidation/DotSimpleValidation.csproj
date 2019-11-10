@@ -1,7 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <AssemblyName>DotSimpleValidation</AssemblyName>
         <RootNamespace>DotSimpleValidation</RootNamespace>
+        <LangVersion>8</LangVersion>
+        <Nullable>enable</Nullable>
+        <PackageVersion>2.0.0</PackageVersion>
+        <Title>DotSimpleValidation</Title>
+        <Authors>IndexOverflow</Authors>
+        <Description>Super simple validation lib for C#</Description>
+        <PackageProjectUrl>https://github.com/IndexOverflow/DotSimpleValidation</PackageProjectUrl>
+        <License>https://github.com/IndexOverflow/DotSimpleValidation/blob/master/LICENSE</License>
+        <RepositoryUrl>https://github.com/IndexOverflow/DotSimpleValidation</RepositoryUrl>
     </PropertyGroup>
 </Project>

@@ -13,7 +13,7 @@ obj/
 nuget-key
 out/
 *.nupkg
-
+.tools/
 *.DotSettings.user
 .idea/
 .idea/.idea.DotSimpleValidation

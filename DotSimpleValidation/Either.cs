@@ -1,36 +1,36 @@
 namespace DotSimpleValidation
 {
-    public abstract class Either<TLeft, TRight>
+    public abstract class Either<TInvalid, TValid>
     {
-        public static Right GoRight(TRight data)
+        public static Valid MakeValid(TValid data)
         {
-            return new Right(data);
+            return new Valid(data);
         }
 
-        public static Left GoLeft(TLeft error)
+        public static Invalid MakeInvalid(TInvalid error)
         {
-            return new Left(error);
+            return new Invalid(error);
         }
 
-        public abstract bool IsRight { get; }
+        public abstract bool IsValid { get; }
 
-        public class Left : Either<TLeft, TRight>
+        public class Invalid : Either<TInvalid, TValid>
         {
-            public TLeft Error { get; }
-            public override bool IsRight => false;
+            public TInvalid Error { get; }
+            public override bool IsValid => false;
 
-            public Left(TLeft error)
+            public Invalid(TInvalid error)
             {
                 Error = error;
             }
         }
 
-        public class Right : Either<TLeft, TRight>
+        public class Valid : Either<TInvalid, TValid>
         {
-            public TRight Data { get; }
-            public override bool IsRight => true;
+            public TValid Data { get; }
+            public override bool IsValid => true;
 
-            public Right(TRight data)
+            public Valid(TValid data)
             {
                 Data = data;
             }

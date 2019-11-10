@@ -25,12 +25,20 @@ namespace DotSimpleValidation
 
             foreach (var validator in validators)
             {
-                var result = validator(self);
-
-                if (result is Either<string, T>.Left left)
+                try
                 {
-                    throw new ValidationException(left.Error.Replace("<<caller>>", caller));
+                    var result = validator(self);
+
+                    if (result is Either<string, T>.Invalid left)
+                    {
+                        throw new ValidationException(left.Error.Replace("<<caller>>", caller));
+                    }
                 }
+                catch (NullReferenceException ex)
+                {
+                    throw new ValidationException($"Uncaught exception occured while validating {caller}", ex);
+                }
+
             }
 
             return self;
@@ -41,13 +49,12 @@ namespace DotSimpleValidation
         /// </summary>
         /// <param name="self">Any Type</param>
         /// <param name="validators">Validators from <see cref="Validators"/></param>
-        /// <typeparam name="TRight">The extended Type to be validated</typeparam>
-        /// <returns><see cref="Either{TLeft,TRight}"/> with Either.Left&lt;TLeft&gt; if error, Either.Right&lt;TRight&gt; if success</returns>
-        public static Either<string, TRight> EitherMustBe<TRight>
+        /// <typeparam name="TValid">The extended Type to be validated</typeparam>
+        /// <returns><see cref="Either{TInvalid,TValid}"/> with Either.Left&lt;TLeft&gt; if error, Either.Right&lt;TRight&gt; if success</returns>
+        public static Either<string, TValid> EitherMustBe<TValid>
         (
-            this TRight self,
-            params Func<TRight,
-                Either<string, TRight>>[] validators
+            this TValid self,
+            params Func<TValid, Either<string, TValid>>[] validators
         )
         {
             var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
@@ -57,19 +64,26 @@ namespace DotSimpleValidation
                 throw new ArgumentException($"No validators provided for EitherMustBe in {caller}");
             }
 
-            Either<string, TRight> result = null;
+            Either<string, TValid>? result = null;
 
             foreach (var validator in validators)
             {
-                result = validator(self);
-
-                if (result is Either<string, TRight>.Left left)
+                try
                 {
-                    return Either<string, TRight>.GoLeft(left.Error.Replace("<<caller>>", caller));
+                    result = validator(self);
+
+                    if (result is Either<string, TValid>.Invalid left)
+                    {
+                        return Either<string, TValid>.MakeInvalid(left.Error.Replace("<<caller>>", caller));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new ValidationException($"Uncaught exception occured while validating {caller}", ex);
                 }
             }
 
-            return result as Either<string, TRight>.Right;
+            return result as Either<string, TValid>.Valid;
         }
     }              
 }

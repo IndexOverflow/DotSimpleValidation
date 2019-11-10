@@ -7,17 +7,30 @@ namespace DotSimpleValidation.Tests
 {
     public class ValidatorTests
     {
+        #pragma warning disable CS8625
+        [Test]
+        public void should_fail_on_null()
+        {
+            Assert.Throws<ValidationException>(() => new NullableTestClass(null));
+        }
+        #pragma warning restore CSCS8625
+        
+        [Test]
+        public void should_be_true_for_predicate()
+        {
+            Assert.That("is a test" == "is a test".MustBe(BeTrue<string>((s) => s.Contains("test"))));
+        }
 
         [Test]
         public void should_create_uri_with_creatable_using()
         {
-            Assert.That("https://github.com" == "https://github.com".MustBe(CreatableUsing((s => new Uri(s)))));
+            Assert.That("https://github.com" == "https://github.com".MustBe(CreatableUsing<string,Uri>((s => new Uri(s)))));
         }
         
         [Test]
         public void should_fail_with_creatable_using()
         {
-            Assert.Throws<ValidationException>(() => "I-AM-NOT-AN-URI".MustBe(CreatableUsing((s => new Uri(s)))));
+            Assert.Throws<ValidationException>(() => "I-AM-NOT-GUID".MustBe(CreatableUsing<string,Guid>((s => new Guid(s)))));
         }
         
         [Test]
@@ -33,10 +46,22 @@ namespace DotSimpleValidation.Tests
         }
 
         [Test]
-        public void should_be_in_allowed_range()
+        public void string_should_be_in_allowed_range()
         {
-            Assert.True("2" == "2".MustBe(Between<string>(1, 3)));
+            Assert.True("2" == "2".MustBe(Between(1, 3)));
         }
+        
+        [Test]
+        public void int_should_be_in_allowed_range()
+        {
+            Assert.True(1 == 1.MustBe(Between<int>(1, 3)));
+        }      
+        
+        [Test]
+        public void double_should_not_be_in_allowed_range()
+        {
+            Assert.Throws<ValidationException>(() => (-33.7).MustBe(Between(7.4,11.9)));
+        }   
 
         [Test]
         public void should_not_be_blank()
@@ -45,29 +70,23 @@ namespace DotSimpleValidation.Tests
         }
 
         [Test]
-        public void should_be_not_be_equal()
+        public void should_be_not_be_equal_strings()
         {
             Assert.Throws<ValidationException>(() => "Aa".MustBe(Equal("Bb")));
         }
-
+        
         [Test]
-        public void should_not_create_someclass()
+        public void should_be_be_equal_strings()
         {
-            Assert.Throws<ValidationException>(() => new SomeClass("okay123", 4, null));
-        }
+            Assert.That("test" == "test".MustBe(Equal("test")));
+        }        
 
-        private class SomeClass
+        #pragma warning disable CS8625
+        [Test]
+        public void should_not_create_test_class()
         {
-            public string ValidDataString { get; }
-            public int ValidNumber { get; }
-            public string SortaOptional { get; }
-
-            public SomeClass(string data, int aNumber, string message)
-            {
-                ValidDataString = data.MustBe(Match(new Regex("([a-zA-Z0-9])")));
-                ValidNumber = aNumber.MustBe(Between<int>(1, 10));
-                SortaOptional = message.MustBe(NotNullOrBlank());
-            }
+            Assert.Throws<ValidationException>(() => new TestClass("okay123", 4, null));
         }
+        #pragma warning restore CS8625
     }
 }
