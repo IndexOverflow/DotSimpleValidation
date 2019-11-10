@@ -24,7 +24,7 @@ namespace DotSimpleValidation.Tests
         [Test]
         public void should_create_uri_with_creatable_using()
         {
-            Assert.That("https://github.com" == "https://github.com".MustBe(CreatableUsing<string,Uri>((s => new Uri(s)))));
+            Assert.That("https://github.com" == "https://github.com".MustBe(CreatableUsing<string,Uri>(s => new Uri(s))));
         }
         
         [Test]

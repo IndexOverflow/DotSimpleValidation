@@ -5,15 +5,15 @@ namespace DotSimpleValidation.Tests
 {
     internal class TestClass
     {
-        public string ValidDataString { get; }
-        public int ValidNumber { get; }
-        public string SortaOptional { get; }
+        public string TextField { get; }
+        public int NumberField { get; }
+        public string AnotherField { get; }
 
-        public TestClass(string data, int aNumber, string message)
+        public TestClass(string alphanumeric, int aNumber, string another)
         {
-            ValidDataString = data.MustBe(Match(new Regex("([a-zA-Z0-9])")));
-            ValidNumber = aNumber.MustBe(Between<int>(1, 10));
-            SortaOptional = message.MustBe(NotNullOrBlank());
+            TextField = alphanumeric.MustBe(Match(new Regex("([a-zA-Z0-9])")));
+            NumberField = aNumber.MustBe(Between<int>(1, 10));
+            AnotherField = another.MustBe(NotNullOrBlank());
         }
     }
 
