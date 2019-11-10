@@ -34,9 +34,9 @@ namespace DotSimpleValidation.Tests
         }
         
         [Test]
-        public void should_not_manipulate_value()
+        public void should_match_regex()
         {
-            Assert.That("normal" == "normal".MustBe(NotNullOrBlank(), Match(new Regex("(normal)"))));
+            Assert.That("normal" == "normal".MustBe(Match(new Regex("(normal)"))));
         }
 
         [Test]

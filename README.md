@@ -64,7 +64,11 @@ public void SaveIfValid(string untrustworthy)
 ```
 
 ```C#
-"normal".MustBe(NotNullOrBlank(), Match(new Regex("(normal)")));
+"normal".MustBe(NotNullOrBlank());
+```
+
+```C#
+"normal".MustBe(Match(new Regex("(normal)")));
 ```
 
 ```C#
