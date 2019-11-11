@@ -1,6 +1,6 @@
 namespace DotSimpleValidation
 {
-    public abstract class Either<TInvalid, TValid>
+    public abstract class Result<TInvalid, TValid>
     {
         public static Valid MakeValid(TValid data)
         {
@@ -14,7 +14,7 @@ namespace DotSimpleValidation
 
         public abstract bool IsValid { get; }
 
-        public class Invalid : Either<TInvalid, TValid>
+        public class Invalid : Result<TInvalid, TValid>
         {
             public TInvalid Error { get; }
             public override bool IsValid => false;
@@ -25,7 +25,7 @@ namespace DotSimpleValidation
             }
         }
 
-        public class Valid : Either<TInvalid, TValid>
+        public class Valid : Result<TInvalid, TValid>
         {
             public TValid Data { get; }
             public override bool IsValid => true;

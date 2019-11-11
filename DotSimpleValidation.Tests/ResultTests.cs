@@ -8,13 +8,13 @@ namespace DotSimpleValidation.Tests
         [Test]
         public void should_be_either_left()
         {
-            Assert.That("fail".EitherMustBe(Equal("notfail")) is Either<string, string>.Invalid);
+            Assert.That("fail".ResultMustBe(Equal("notfail")) is Result<string, string>.Invalid);
         }
 
         [Test]
         public void should_be_either_right()
         {
-            Assert.That("success".EitherMustBe(Equal("success")) is Either<string, string>.Valid);
+            Assert.That("success".ResultMustBe(Equal("success")) is Result<string, string>.Valid);
         }
     }
 }

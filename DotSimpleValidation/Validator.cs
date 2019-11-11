@@ -14,7 +14,7 @@ namespace DotSimpleValidation
         /// <typeparam name="T">The extended Type to be validated</typeparam>
         /// <returns>T</returns>
         /// <exception cref="ValidationException">Thrown if a validator fails. Extends <see cref="ArgumentException"/>.</exception>
-        public static T MustBe<T>(this T self, params Func<T, Either<string, T>>[] validators)
+        public static T MustBe<T>(this T self, params Func<T, Result<string, T>>[] validators)
         {
             var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
 
@@ -29,9 +29,9 @@ namespace DotSimpleValidation
                 {
                     var result = validator(self);
 
-                    if (result is Either<string, T>.Invalid left)
+                    if (result is Result<string, T>.Invalid invalid)
                     {
-                        throw new ValidationException(left.Error.Replace("<<caller>>", caller));
+                        throw new ValidationException(invalid.Error.Replace("<<caller>>", caller));
                     }
                 }
                 catch (NullReferenceException ex)
@@ -50,11 +50,11 @@ namespace DotSimpleValidation
         /// <param name="self">Any Type</param>
         /// <param name="validators">Validators from <see cref="Validators"/></param>
         /// <typeparam name="TValid">The extended Type to be validated</typeparam>
-        /// <returns><see cref="Either{TInvalid,TValid}"/> with Either.Left&lt;TLeft&gt; if error, Either.Right&lt;TRight&gt; if success</returns>
-        public static Either<string, TValid> EitherMustBe<TValid>
+        /// <returns><see cref="Result{TInvalid,TValid}"/> with Either.Left&lt;TLeft&gt; if error, Either.Right&lt;TRight&gt; if success</returns>
+        public static Result<string, TValid> ResultMustBe<TValid>
         (
             this TValid self,
-            params Func<TValid, Either<string, TValid>>[] validators
+            params Func<TValid, Result<string, TValid>>[] validators
         )
         {
             var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
@@ -64,7 +64,7 @@ namespace DotSimpleValidation
                 throw new ArgumentException($"No validators provided for EitherMustBe in {caller}");
             }
 
-            Either<string, TValid>? result = null;
+            Result<string, TValid>? result = null;
 
             foreach (var validator in validators)
             {
@@ -72,9 +72,9 @@ namespace DotSimpleValidation
                 {
                     result = validator(self);
 
-                    if (result is Either<string, TValid>.Invalid left)
+                    if (result is Result<string, TValid>.Invalid left)
                     {
-                        return Either<string, TValid>.MakeInvalid(left.Error.Replace("<<caller>>", caller));
+                        return Result<string, TValid>.MakeInvalid(left.Error.Replace("<<caller>>", caller));
                     }
                 }
                 catch (Exception ex)
@@ -83,7 +83,7 @@ namespace DotSimpleValidation
                 }
             }
 
-            return result as Either<string, TValid>.Valid;
+            return result! as Result<string, TValid>.Valid;
         }
     }              
 }
