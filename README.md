@@ -6,7 +6,7 @@ You want validation, but you don't want an entire framework? This tiny project m
 Meant to be used in constructors it will ensure that your objects don't contain invalid data. 
 Works well with Domain primitives.
 
-If a property fails validation the Validator will throw `ValidationException` (which extends `ArgumentException`). If you don't want to put validation in your constructors the project exposes its internal helper class which will `Either` contain a `Invalid` (invalid) or `Valid` (valid) side. 
+If a property fails validation the Validator will throw `ValidationException` (which extends `ArgumentException`). If you don't want to put validation in your constructors the project exposes its internal helper class (`Result`) which either contains an `Invalid` (invalid) or `Valid` (valid) side. 
 
 ### Validation
 
