@@ -31,20 +31,20 @@ namespace DotSimpleValidation.Tests
     }
 ```
 
-### Either
+### Result
 
 ```C#
 public void SaveIfValid(string untrustworthy)
 {
-    var result = untrustworthy.EitherMustBe(Match(new Regex("(safe)")));
+    var result = untrustworthy.ResultMustBe(Match(new Regex("(safe)")));
 
-    if (result is Either<string, string>.Valid valid)
+    if (result is Result<string, string>.Valid valid)
     {
         Repo.SaveValidData(valid.Data);
     }
     else
     {
-        throw new ArgumentException(((Either<string,string>.Invalid) result).Error);    
+        throw new ArgumentException(((Result<string,string>.Invalid) result).Error);    
     } 
 }
 ```
