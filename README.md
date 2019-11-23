@@ -55,7 +55,8 @@ Nullable reference types (and `Nullable<T>`) from C#8 are supported via a new he
 
 ```C#
 string? test = null;
-test.NotNull().MustBe(BeTrue<string>((s) => s.Contains("test"))); 
+// Will throw ValidationException
+test.NotNull().MustBe(TrueFor<string>((s) => s.Contains("test"))); 
 ```
 
 *This was deemed the best compromise due to the conflict between `T? where : class` and `T where : struct`. A PR is welcome for an alternate approach.* 
