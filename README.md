@@ -20,13 +20,13 @@ namespace DotSimpleValidation.Tests
     {
         public string TextField { get; }
         public int NumberField { get; }
-        public string AnotherField { get; }
+        public string? AnotherField { get; }
 
-        public TestClass(string alphanumeric, int aNumber, string another)
+        public TestClass(string alphanumeric, int aNumber, string? another)
         {
             TextField = alphanumeric.MustBe(Match(new Regex("([a-zA-Z0-9])")));
             NumberField = aNumber.MustBe(Between<int>(1, 10));
-            AnotherField = another.MustBe(NotNullOrBlank());
+            AnotherField = another.NotNull().MustBe(NotBlankOrEmpty());
         }
     }
 ```
@@ -48,6 +48,17 @@ public void SaveIfValid(string untrustworthy)
     } 
 }
 ```
+
+### Nullable
+
+Nullable reference types (and `Nullable<T>`) from C#8 are supported via a new helper, `NotNull`. 
+
+```C#
+string? test = null;
+test.NotNull().MustBe(BeTrue<string>((s) => s.Contains("test"))); 
+```
+
+*This was deemed the best compromise due to the conflict between `T? where : class` and `T where : struct`. A PR is welcome for an alternate approach.* 
 
 ### Included validators
 

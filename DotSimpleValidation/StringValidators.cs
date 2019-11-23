@@ -18,7 +18,7 @@ namespace DotSimpleValidation
             };
         }
         
-        public static Func<string, Result<string, string>> NotNullOrBlank()
+        public static Func<string, Result<string, string>> NotBlankOrEmpty()
         {
             return value =>
             {
@@ -35,10 +35,7 @@ namespace DotSimpleValidation
         {
             return value =>
             {
-                var parseResult = true;
-                var intValue = 0;
-
-                parseResult = int.TryParse(value, out intValue);
+                var parseResult = int.TryParse(value, out var intValue);
 
                 if (parseResult && (min <= intValue && intValue <= max))
                 {
@@ -46,6 +43,22 @@ namespace DotSimpleValidation
                 }
 
                 return Result<string, string>.MakeInvalid($"{value} is not between allowed range {min}-{max} in <<caller>>");
+            };
+        }
+        
+        public static Func<string, Result<string, string>> OfLength(int minLength, int maxLength = 0)
+        {
+            return value =>
+            {
+                if (value.Length >= minLength)
+                {
+                    if (maxLength == 0 || value.Length <= maxLength)
+                    {
+                        return Result<string, string>.MakeValid(value);    
+                    }
+                }
+
+                return Result<string, string>.MakeInvalid($"{value} did not meet length requirements in <<caller>>");
             };
         }
     }

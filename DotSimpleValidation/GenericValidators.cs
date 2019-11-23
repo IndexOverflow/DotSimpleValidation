@@ -4,7 +4,7 @@ namespace DotSimpleValidation
 {
     public static partial class Validators
     {
-        public static Func<T, Result<string,T>> BeTrue<T>(Predicate<T> predicate)
+        public static Func<T, Result<string, T>> TrueFor<T>(Predicate<T> predicate)
         {
             return (value) =>
             {
@@ -13,10 +13,13 @@ namespace DotSimpleValidation
                     return Result<string, T>.MakeValid(value);
                 }
 
-                return Result<string, T>.MakeInvalid($"\"{value}\" was not true for given predicate in <<caller>>");
+                return Result<string, T>.MakeInvalid
+                (
+                    $"\"{value}\" was not true for given predicate in <<caller>>"
+                );
             };
         }
-        
+
         public static Func<T, Result<string, T>> Equal<T>(T match)
         {
             return (value) =>
@@ -26,15 +29,17 @@ namespace DotSimpleValidation
                     return Result<string, T>.MakeValid(value);
                 }
 
-                return Result<string, T>.MakeInvalid($"\"{value}\" does not match \"{match}\" in <<caller>>");
+                return Result<string, T>.MakeInvalid
+                (
+                    $"\"{value}\" does not match \"{match}\" in <<caller>>"
+                );
             };
         }
-        
-        public static Func<T, Result<string, T>> CreatableUsing<T,TCreatable>(Func<T, TCreatable> constructor)
+
+        public static Func<T, Result<string, T>> CreatableUsing<T, TCreatable>(Func<T, TCreatable> constructor)
         {
             return (value) =>
             {
-
                 try
                 {
                     constructor(value);
@@ -42,13 +47,16 @@ namespace DotSimpleValidation
                 }
                 catch (Exception e)
                 {
-                    return Result<string, T>.MakeInvalid($"{value} could not be created using given constructor in <<caller>>, produced ￿\"${e.Message}\"");
+                    return Result<string, T>.MakeInvalid
+                    (
+                        $"{value} could not be created using given constructor in <<caller>>," +
+                        $" produced ￿\"${e.Message}\""
+                    );
                 }
-
             };
         }
-        
-        public static Func<T, Result<string, T>> Between<T>(T min, T max) where T : IComparable 
+
+        public static Func<T, Result<string, T>> Between<T>(T min, T max) where T : IComparable
         {
             return value =>
             {
@@ -60,8 +68,11 @@ namespace DotSimpleValidation
                     return Result<string, T>.MakeValid(value);
                 }
 
-                return Result<string, T>.MakeInvalid($"{value} is not between allowed range {min}-{max} in <<caller>>");
+                return Result<string, T>.MakeInvalid
+                (
+                    $"{value} is not between allowed range {min}-{max} in <<caller>>"
+                );
             };
-        }        
+        }
     }
 }

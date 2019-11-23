@@ -20,7 +20,7 @@ namespace DotSimpleValidation
 
             if (!validators.Any())
             {
-                throw new ArgumentException($"No validators provided for MustBe in {caller}");
+                throw new ValidationException($"No validators provided for MustBe in {caller}");
             }
 
             foreach (var validator in validators)
@@ -61,7 +61,7 @@ namespace DotSimpleValidation
 
             if (!validators.Any())
             {
-                throw new ArgumentException($"No validators provided for EitherMustBe in {caller}");
+                throw new ValidationException($"No validators provided for ResultMustBe in {caller}");
             }
 
             Result<string, TValid>? result = null;
@@ -83,7 +83,12 @@ namespace DotSimpleValidation
                 }
             }
 
-            return result! as Result<string, TValid>.Valid;
+            if (result == null)
+            {
+                throw new ValidationException("Unexpected null returned from Validator, check provided lambdas");
+            }
+            
+            return (Result<string, TValid>.Valid) result;
         }
     }              
 }
