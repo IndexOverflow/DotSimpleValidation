@@ -5,7 +5,7 @@
         <RootNamespace>DotSimpleValidation</RootNamespace>
         <LangVersion>8</LangVersion>
         <Nullable>enable</Nullable>
-        <PackageVersion>2.0.0</PackageVersion>
+        <PackageVersion>3.0.0</PackageVersion>
         <Title>DotSimpleValidation</Title>
         <Authors>IndexOverflow</Authors>
         <Description>Super simple validation lib for C#</Description>
