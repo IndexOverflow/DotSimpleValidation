@@ -36,9 +36,8 @@ namespace DotSimpleValidation
                 }
                 catch (NullReferenceException ex)
                 {
-                    throw new ValidationException($"Uncaught exception occured while validating {caller}", ex);
+                    throw new ValidationException($"Unexpected NullReferenceException occured while validating {caller}", ex);
                 }
-
             }
 
             return self;
