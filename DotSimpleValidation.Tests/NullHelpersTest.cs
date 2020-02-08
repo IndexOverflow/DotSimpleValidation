@@ -7,11 +7,13 @@ namespace DotSimpleValidation.Tests
 {
     public class NullableTests
     {
+        #pragma warning disable CS8625
         [Fact]
         public void Should_Throw_On_Not_Nullable_Field()
         {
             Assert.Throws<ValidationException>(() => new NullableTestClass(null, null));
         }
+        #pragma warning restore
         
         [Fact]
         public void Should_See_Nullable_Field()

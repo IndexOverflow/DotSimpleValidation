@@ -25,7 +25,7 @@ namespace DotSimpleValidation.Tests
             var validResult = "success".ResultMustBe(Equal("success")) as Result<string, string>.Valid;
 
             Assert.NotNull(validResult);
-            Assert.Equal("success", validResult.Data);
+            Assert.Equal("success", validResult!.Data);
         }
     }
 }
