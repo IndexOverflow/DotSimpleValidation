@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 
 namespace DotSimpleValidation.Tests
@@ -11,8 +10,8 @@ namespace DotSimpleValidation.Tests
         [InlineData("ccc", "a", false)]
         public void Should_Validate_TrueFor(string value, string substring, bool expectValid)
         {
-            var result = Validators.TrueFor<string>(s => s.Contains(substring));
-            AssertResult(result(value), expectValid);
+            var validator = Validators.TrueFor<string>(s => s.Contains(substring));
+            AssertResult(validator(value), expectValid);
         }
 
         [Theory]
@@ -22,13 +21,15 @@ namespace DotSimpleValidation.Tests
         [InlineData(1.3, 1.4, false)]
         public void Should_Validate_Equal(object match, object candidate, bool expectValid)
         {
-            var result = Validators.Equal(candidate);
-            AssertResult(result(match), expectValid);
+            var validator = Validators.Equal(candidate);
+            AssertResult(validator(match), expectValid);
         }
 
         [Theory]
         [InlineData("1", "3", "2", true)]
+        [InlineData("-1", "-3", "-2", true)]
         [InlineData("1", "1", "2", false)]
+        [InlineData("-10", "-12", "-9", false)]
         
         [InlineData(1, 3, 2, true)]
         [InlineData(1, 1, 2, false)]
@@ -59,7 +60,7 @@ namespace DotSimpleValidation.Tests
         }
 
 
-        private static void AssertResult<T1, T2>(Result<T1, T2> result, bool expectValid)
+        public static void AssertResult<T1, T2>(Result<T1, T2> result, bool expectValid)
         {
             if (expectValid)
             {

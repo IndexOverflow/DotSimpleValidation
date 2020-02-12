@@ -1,5 +1,4 @@
 using DotSimpleValidation.Tests.Examples;
-using DotSimpleValidation.Tests.Usage;
 using Xunit;
 using static DotSimpleValidation.Validators;
 

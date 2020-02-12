@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace DotSimpleValidation
@@ -15,6 +17,19 @@ namespace DotSimpleValidation
                 }
 
                 return Result<string, string>.MakeInvalid($"{value} does not match given pattern in <<caller>>");
+            };
+        }
+        
+        public static Func<string, Result<string, string>> Match(IEnumerable<char> pattern)
+        {
+            return (value) =>
+            {
+                if (value.Any(v => !pattern.Contains(v)))
+                {
+                    return Result<string, string>.MakeInvalid($"{value} does not match given pattern in <<caller>>");
+                }
+                
+                return Result<string, string>.MakeValid(value);
             };
         }
         
@@ -37,9 +52,16 @@ namespace DotSimpleValidation
             {
                 var parseResult = int.TryParse(value, out var intValue);
 
-                if (parseResult && (min <= intValue && intValue <= max))
+                if (parseResult)
                 {
-                    return Result<string, string>.MakeValid(value);
+                    var minAbs = Math.Abs(min);
+                    var maxAbs = Math.Abs(max);
+                    var valAbs = Math.Abs(intValue);
+                    
+                        if (minAbs <= valAbs && valAbs <= maxAbs)
+                        {
+                            return Result<string, string>.MakeValid(value);        
+                        }
                 }
 
                 return Result<string, string>.MakeInvalid($"{value} is not between allowed range {min}-{max} in <<caller>>");
