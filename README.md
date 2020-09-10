@@ -29,9 +29,29 @@ namespace DotSimpleValidation.Tests
             AnotherField = another.NotNull().MustBe(NotBlankOrEmpty());
         }
     }
+}
 ```
 
-### Result
+### IsValid()...IfInvalid()
+
+```C#
+public void SafetyFirst(string untrustworthy)
+{
+    var result = untrustworthy
+        .IsValid(Match(new Regex("(safe)")))
+        .IfInvalid(new ErrorMessage("You are evil!"));
+
+    switch (result)
+    {
+        case Result<ErrorMessage,string>.Valid valid:
+            return Ok("Thanks for being safe!");
+        case Result<ErrorMessage,string>.Invalid invalid:
+            return BadRequest(invalid.Error);
+    }
+}
+```
+
+### Result (Obsolete)
 
 ```C#
 public void SaveIfValid(string untrustworthy)

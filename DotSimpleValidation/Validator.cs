@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DotSimpleValidation
 {
-    public static class Validator
+    public static class Validator 
     {
         /// <summary>
         /// Runs through given validators. Fails fast, first error will throw <see cref="ValidationException"/>
@@ -13,7 +13,8 @@ namespace DotSimpleValidation
         /// <param name="validators">Validators from <see cref="Validators"/></param>
         /// <typeparam name="T">The extended Type to be validated</typeparam>
         /// <returns>T</returns>
-        /// <exception cref="ValidationException">Thrown if a validator fails. Extends <see cref="ArgumentException"/>.</exception>
+        /// <exception cref="ValidationException">Thrown if a validator fails. Extends <see cref="ArgumentException"/>.
+        /// </exception>
         public static T MustBe<T>(this T self, params Func<T, Result<string, T>>[] validators)
         {
             var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
@@ -43,13 +44,7 @@ namespace DotSimpleValidation
             return self;
         }
 
-        /// <summary>
-        /// Runs through given validators. Fails fast, first encountered error will return 
-        /// </summary>
-        /// <param name="self">Any Type</param>
-        /// <param name="validators">Validators from <see cref="Validators"/></param>
-        /// <typeparam name="TValid">The extended Type to be validated</typeparam>
-        /// <returns><see cref="Result{TInvalid,TValid}"/> with Either.Left&lt;TLeft&gt; if error, Either.Right&lt;TRight&gt; if success</returns>
+        [Obsolete("Will be replaced in favor of IsValid()")]
         public static Result<string, TValid> ResultMustBe<TValid>
         (
             this TValid self,
@@ -89,5 +84,24 @@ namespace DotSimpleValidation
             
             return (Result<string, TValid>.Valid) result;
         }
-    }              
+
+        /// <summary>
+        /// Runs through given validators. Must be followed by <see cref="IfInvalid(TInvalid invalid)"/>"/>"/>
+        /// Fails fast, first encountered error will return 
+        /// </summary>
+        /// <param name="self">Any Type</param>
+        /// <param name="validators">Validators from <see cref="Validators"/></param>
+        /// <typeparam name="TValid">The extended Type to be validated</typeparam>
+        /// <returns><see cref="Result{TInvalid,TValid}"/></returns>
+        public static INeedInvalid<TValid> IsValid<TValid>
+        (
+            this TValid self,
+            params Func<TValid, Result<string, TValid>>[] validators
+        )
+        {
+            return new ValidatorHelper<TValid>(self, validators);
+        }
+    }
+
+
 }
