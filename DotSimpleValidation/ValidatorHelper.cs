@@ -20,7 +20,6 @@ namespace DotSimpleValidation
             _validators = validators;
         }
 
-
         public Result<TInvalid, TValid> IfInvalid<TInvalid>(TInvalid invalid)
         {
             var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";

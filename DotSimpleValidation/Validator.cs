@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace DotSimpleValidation
@@ -43,7 +44,89 @@ namespace DotSimpleValidation
 
             return self;
         }
+        
+        /// <summary>
+        /// Will try to validate the given struct T
+        /// against provided validators. 
+        /// </summary>
+        /// <param name="value">The value to be validated</param>
+        /// <param name="valid">Validated struct of T if valid, otherwise default(T)</param>
+        /// <param name="validators">Validators from <see cref="Validators"/></param>
+        /// <typeparam name="T">The extended struct to be validated</typeparam>
+        /// <returns>true if all validators passed, false otherwise</returns>
+        /// <exception cref="ValidationException"></exception>
+        public static bool TryValidation<T>
+        (
+            [AllowNull] T value,
+            [NotNullWhen(true)] out T valid,
+            params Func<T, Result<string, T>>[] validators
+        )  
+        {
+            var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
 
+            if (!validators.Any())
+            {
+                throw new ValidationException($"No validators provided for TryValidation in {caller}");
+            }
+
+            if (TryValidate(value,validators))
+            {
+                valid = value!;
+                return true;
+            }
+
+            valid = default!;
+            return false;
+        }
+
+        private static bool TryValidate<T>
+        (
+            [AllowNull] T value,
+            params Func<T, Result<string, T>>[] validators
+        )
+        {
+            if (value == null)
+            {
+                return false;
+            }
+            
+            foreach (var validator in validators)
+            {
+                try
+                {
+                    var result = validator(value);
+
+                    if (result is Result<string, T>.Invalid _)
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            
+            return true;
+        } 
+
+        /// <summary>
+        /// Runs through given validators. Must be followed by <see cref="IfInvalid(TInvalid invalid)"/>"/>"/>
+        /// Fails fast, first encountered error will return 
+        /// </summary>
+        /// <param name="self">Any Type</param>
+        /// <param name="validators">Validators from <see cref="Validators"/></param>
+        /// <typeparam name="T">The extended Type to be validated</typeparam>
+        /// <returns><see cref="Result{TInvalid,TValid}"/></returns>
+        public static INeedInvalid<T> IsValid<T>
+        (
+            this T self,
+            params Func<T, Result<string, T>>[] validators
+        )
+        {
+            return new ValidatorHelper<T>(self, validators);
+        }
+        
         [Obsolete("Will be replaced in favor of IsValid()")]
         public static Result<string, TValid> ResultMustBe<TValid>
         (
@@ -68,7 +151,8 @@ namespace DotSimpleValidation
 
                     if (result is Result<string, TValid>.Invalid left)
                     {
-                        return Result<string, TValid>.MakeInvalid(left.Error.Replace("<<caller>>", caller));
+                        return Result<string, TValid>
+                            .MakeInvalid(left.Error.Replace("<<caller>>", caller));
                     }
                 }
                 catch (Exception ex)
@@ -83,23 +167,6 @@ namespace DotSimpleValidation
             }
             
             return (Result<string, TValid>.Valid) result;
-        }
-
-        /// <summary>
-        /// Runs through given validators. Must be followed by <see cref="IfInvalid(TInvalid invalid)"/>"/>"/>
-        /// Fails fast, first encountered error will return 
-        /// </summary>
-        /// <param name="self">Any Type</param>
-        /// <param name="validators">Validators from <see cref="Validators"/></param>
-        /// <typeparam name="TValid">The extended Type to be validated</typeparam>
-        /// <returns><see cref="Result{TInvalid,TValid}"/></returns>
-        public static INeedInvalid<TValid> IsValid<TValid>
-        (
-            this TValid self,
-            params Func<TValid, Result<string, TValid>>[] validators
-        )
-        {
-            return new ValidatorHelper<TValid>(self, validators);
         }
     }
 
