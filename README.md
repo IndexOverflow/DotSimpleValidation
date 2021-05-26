@@ -9,7 +9,7 @@ Works well with Domain primitives.
 If a property fails validation the Validator will throw `DotSimpleValidation.ValidationException` (which extends `System.ArgumentException`).  
  
  If you don't want to put validation in your constructors 
- a few convience methods are also provided. `TryValidate` which works similar to `TryParse` methods
+ a few convenience methods are also provided. `TryValidate` which works similar to `TryParse` methods
  found elsewhere in the language, and the more FP inspired `IsValid` & `IfInvalid`.    
  
  `IsValid` exposes the project's internal helper class `Result` which either contains an `Invalid` (invalid) or `Valid` (valid) side.   
@@ -128,24 +128,6 @@ internal class NullableTestClass
 "Aa".MustBe(Equal("Aa"));
 ```
 
-### Result (Obsolete)
-Will be removed in next major version.
-```C#
-public void SaveIfValid(string untrustworthy)
-{
-    var result = untrustworthy.ResultMustBe(Match(new Regex("(safe)")));
-
-    if (result is Result<string, string>.Valid valid)
-    {
-        Repo.SaveValidData(valid.Data);
-    }
-    else
-    {
-        throw new ArgumentException(((Result<string,string>.Invalid) result).Error);    
-    } 
-}
-```
-
 ### Domain primitives example
 
 This is our domain entity - we only want it to contain valid data.
@@ -184,8 +166,8 @@ internal class Age
 ```C#
 internal class Name : DomainStringPrimitive
 {
-    // don't ever actually use this regex pattern!
-    public Name(string? value) : base(value, @"^[a-zA-Z ]{2,50}$") 
+    // example regex pattern!
+    public Name(string? value) : base(value, @"^[a-zA-Z]{2,50}$") 
     {
     }
 }

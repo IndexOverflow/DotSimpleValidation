@@ -64,12 +64,12 @@ namespace DotSimpleValidation
         {
             var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
 
-            if (!validators.Any())
+            if (validators == null || !validators.Any())
             {
                 throw new ValidationException($"No validators provided for TryValidation in {caller}");
             }
 
-            if (TryValidate(value,validators))
+            if (TryValidate(value,validators!))
             {
                 valid = value!;
                 return true;
@@ -125,48 +125,6 @@ namespace DotSimpleValidation
         )
         {
             return new ValidatorHelper<T>(self, validators);
-        }
-        
-        [Obsolete("Will be replaced in favor of IsValid()")]
-        public static Result<string, TValid> ResultMustBe<TValid>
-        (
-            this TValid self,
-            params Func<TValid, Result<string, TValid>>[] validators
-        )
-        {
-            var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
-
-            if (!validators.Any())
-            {
-                throw new ValidationException($"No validators provided for ResultMustBe in {caller}");
-            }
-
-            Result<string, TValid>? result = null;
-
-            foreach (var validator in validators)
-            {
-                try
-                {
-                    result = validator(self);
-
-                    if (result is Result<string, TValid>.Invalid left)
-                    {
-                        return Result<string, TValid>
-                            .MakeInvalid(left.Error.Replace("<<caller>>", caller));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new ValidationException($"Uncaught exception occured while validating {caller}", ex);
-                }
-            }
-
-            if (result == null)
-            {
-                throw new ValidationException("Unexpected null returned from Validator, check provided lambdas");
-            }
-            
-            return (Result<string, TValid>.Valid) result;
         }
     }
 
