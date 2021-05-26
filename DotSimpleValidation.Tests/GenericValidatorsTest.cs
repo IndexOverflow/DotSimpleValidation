@@ -58,9 +58,8 @@ namespace DotSimpleValidation.Tests
                     break;
             }
         }
-
-
-        public static void AssertResult<T1, T2>(Result<T1, T2> result, bool expectValid)
+        
+        internal static void AssertResult<T1, T2>(Result<T1, T2> result, bool expectValid)
         {
             if (expectValid)
             {

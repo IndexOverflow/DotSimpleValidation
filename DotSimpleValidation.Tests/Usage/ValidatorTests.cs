@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using DotSimpleValidation.Tests.Examples;
 using Xunit;
 using static DotSimpleValidation.Validators;
 

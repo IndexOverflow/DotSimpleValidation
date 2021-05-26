@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFrameworks>netstandard2.1; net5.0</TargetFrameworks>
         <AssemblyName>DotSimpleValidation</AssemblyName>
         <RootNamespace>DotSimpleValidation</RootNamespace>
         <LangVersion>8</LangVersion>
         <Nullable>enable</Nullable>
-        <PackageVersion>3.1.0</PackageVersion>
+        <PackageVersion>4.0.0</PackageVersion>
         <Title>DotSimpleValidation</Title>
         <Authors>IndexOverflow</Authors>
         <Description>Super simple validation lib for C#</Description>

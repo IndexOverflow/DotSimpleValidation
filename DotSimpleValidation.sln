@@ -4,6 +4,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotSimpleValidation", "DotS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotSimpleValidation.Tests", "DotSimpleValidation.Tests\DotSimpleValidation.Tests.csproj", "{504E5C6E-55AA-4A6E-9B97-3D22371DEA88}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{FB9A9BC2-7F99-4512-AD7F-EDB2A356C2CF}"
+ProjectSection(SolutionItems) = preProject
+	README.md = README.md
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
