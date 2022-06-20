@@ -148,7 +148,7 @@ internal class ExampleClassB
 }
 ```
 
-`Age` is a simple domain primitive which validates that your age can only be an integer between 1 and 100.
+`Age` is a simple domain primitive which validates that your age can only be an integer between 16 and 120.
 
 ```C#
 internal class Age
@@ -157,21 +157,11 @@ internal class Age
 
     public Age(int? age)
     {
-        Value = age.NotNull().MustBe(Between<int>(1, 150));
+        Value = age.NotNull().MustBe(Between<int>(16, 120));
     }
 }
 ```
-`Name` and `Occupation` are additional primitives which will hold a persons' name and occupation.
 
-```C#
-internal class Name : DomainStringPrimitive
-{
-    // example regex pattern!
-    public Name(string? value) : base(value, @"^[a-zA-Z]{2,50}$") 
-    {
-    }
-}
-```
 Regular expressions are great for performing input validation, and as you can image this is a fairly frequently used pattern. We therefore create a base class, `DomainStringPrimitive`.  
 
 **Note:** It is recommended that you always check the length of string before applying a RegEx, see `StringValidators.OfLength`
@@ -189,6 +179,18 @@ internal abstract class DomainStringPrimitive
     public override string ToString()
     {
         return Value;
+    }
+}
+```
+
+We can now use our super class with our `Name` primitive example.
+
+```C#
+internal class Name : DomainStringPrimitive
+{
+    // example regex pattern!
+    public Name(string? value) : base(value, @"^[a-zA-Z]{2,50}$") 
+    {
     }
 }
 ```
