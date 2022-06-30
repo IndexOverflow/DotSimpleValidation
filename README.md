@@ -2,9 +2,9 @@
 
 [![DotSimpleValidation](https://img.shields.io/nuget/v/DotSimpleValidation )](https://www.nuget.org/packages/DotSimpleValidation/)
 
-You want validation, but you don't want an entire framework? This tiny project may be of help.
+You want input (or output) validation, but don't want an entire framework? This tiny project may be of help.
 Meant to be used in constructors it will ensure that your objects don't contain invalid data. 
-Works well with Domain primitives.
+Works well with Domain primitives (What's that? [Read this amazing book!](https://www.manning.com/books/secure-by-design)).
 
 If a property fails validation the Validator will throw `DotSimpleValidation.ValidationException` (which extends `System.ArgumentException`).  
  
@@ -54,6 +54,38 @@ public IActionResult MyWebMethod(string? untrustworthy)
     } 
  
     return BadRequest("Sorry, you can't be trusted");     
+}
+```
+
+You can also reuse validators to make sure behaviour is consistent between 
+constructors and "Optional" methods. 
+
+```C#
+private class ReuseClass
+{
+    public readonly string Value;
+    private static readonly Regex Pattern = new Regex(@"^aaa+$");
+
+    // these are our validators used in both the constructor and Optional method.
+    private static readonly ImmutableList<Func<string, Result<string, string>>> Validators =
+        ImmutableList.Create(OfLength(3, 3), Match(Pattern), Equal("aaa"));
+
+    public ReuseClass(string value)
+    {
+        Value = value.MustBe(Validators);
+    }
+
+    private ReuseClass(string value, bool _)
+    {
+        Value = value;
+    }
+
+    public static ReuseClass? Optional(string? candidate)
+    {
+        return Validator.TryValidation(candidate, out var valid, Validators)
+            ? new ReuseClass(valid, true)
+            : null;
+    }
 }
 ```
 
