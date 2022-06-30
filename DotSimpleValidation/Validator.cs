@@ -1,12 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace DotSimpleValidation
 {
-    public static class Validator 
+    public static class Validator
     {
+        /// <summary>
+        /// Runs through given validators. Fails fast, first error will throw <see cref="ValidationException"/>
+        /// </summary>
+        /// <param name="self">Any Type</param>
+        /// <param name="validators">List of Validators from <see cref="Validators"/></param>
+        /// <typeparam name="T">The extended Type to be validated</typeparam>
+        /// <returns>T</returns>
+        /// <exception cref="ValidationException">Thrown if a validator fails. Extends <see cref="ArgumentException"/>.
+        /// </exception>
+        public static T MustBe<T>(this T self, ImmutableList<Func<T, Result<string, T>>> validators)
+        {
+            var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
+            return RunValidators(self, validators.ToArray(), caller);
+        }
+
         /// <summary>
         /// Runs through given validators. Fails fast, first error will throw <see cref="ValidationException"/>
         /// </summary>
@@ -19,7 +36,11 @@ namespace DotSimpleValidation
         public static T MustBe<T>(this T self, params Func<T, Result<string, T>>[] validators)
         {
             var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
+            return RunValidators(self, validators, caller);
+        }
 
+        private static T RunValidators<T>(this T self, Func<T, Result<string, T>>[] validators, string caller)
+        {
             if (!validators.Any())
             {
                 throw new ValidationException($"No validators provided for MustBe in {caller}");
@@ -38,13 +59,45 @@ namespace DotSimpleValidation
                 }
                 catch (NullReferenceException ex)
                 {
-                    throw new ValidationException($"Unexpected NullReferenceException occured while validating {caller}", ex);
+                    throw new ValidationException
+                    (
+                        $"Unexpected NullReferenceException occured while validating {caller}", ex
+                    );
                 }
             }
 
             return self;
         }
-        
+
+        /// <summary>
+        /// Will try to validate the given struct T
+        /// against provided validators. 
+        /// </summary>
+        /// <param name="value">The value to be validated</param>
+        /// <param name="valid">Validated struct of T if valid, otherwise default(T)</param>
+        /// <param name="validators">List of Validators from <see cref="Validators"/></param>
+        /// <typeparam name="T">The extended struct to be validated</typeparam>
+        /// <returns>true if all validators passed, false otherwise</returns>
+        /// <exception cref="ValidationException"></exception>
+        public static bool TryValidation<T>
+        (
+            T? value,
+            [NotNullWhen(true)] out T valid,
+            ImmutableList<Func<T, Result<string, T>>> validators
+        )
+        {
+            var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
+            
+            if (TryValidate(value, validators.ToArray(), caller))
+            {
+                valid = value!;
+                return true;
+            }
+
+            valid = default!;
+            return false;
+        }
+
         /// <summary>
         /// Will try to validate the given struct T
         /// against provided validators. 
@@ -57,19 +110,14 @@ namespace DotSimpleValidation
         /// <exception cref="ValidationException"></exception>
         public static bool TryValidation<T>
         (
-            [AllowNull] T value,
+            T? value,
             [NotNullWhen(true)] out T valid,
             params Func<T, Result<string, T>>[] validators
-        )  
+        )
         {
             var caller = new StackFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? "?";
 
-            if (validators == null || !validators.Any())
-            {
-                throw new ValidationException($"No validators provided for TryValidation in {caller}");
-            }
-
-            if (TryValidate(value,validators!))
+            if (TryValidate(value, validators!, caller))
             {
                 valid = value!;
                 return true;
@@ -81,15 +129,21 @@ namespace DotSimpleValidation
 
         private static bool TryValidate<T>
         (
-            [AllowNull] T value,
-            params Func<T, Result<string, T>>[] validators
+            T? value,
+            Func<T, Result<string, T>>[] validators, 
+            string caller
         )
         {
+            if (validators == null || !validators.Any())
+            {
+                throw new ValidationException($"No validators provided for TryValidation in {caller}");
+            }
+            
             if (value == null)
             {
                 return false;
             }
-            
+
             foreach (var validator in validators)
             {
                 try
@@ -106,9 +160,9 @@ namespace DotSimpleValidation
                     return false;
                 }
             }
-            
+
             return true;
-        } 
+        }
 
         /// <summary>
         /// Runs through given validators. Must be followed by <see cref="IfInvalid(TInvalid invalid)"/>"/>"/>
@@ -127,6 +181,4 @@ namespace DotSimpleValidation
             return new ValidatorHelper<T>(self, validators);
         }
     }
-
-
 }

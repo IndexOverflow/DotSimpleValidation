@@ -13,4 +13,7 @@
         <License>https://github.com/IndexOverflow/DotSimpleValidation/blob/master/LICENSE</License>
         <RepositoryUrl>https://github.com/IndexOverflow/DotSimpleValidation</RepositoryUrl>
     </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+    </ItemGroup>
 </Project>
