@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.1; net5.0; net6.0</TargetFrameworks>
+        <TargetFrameworks>netstandard2.1; net6.0; net7.0</TargetFrameworks>
         <AssemblyName>DotSimpleValidation</AssemblyName>
         <RootNamespace>DotSimpleValidation</RootNamespace>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
-        <PackageVersion>4.1.0</PackageVersion>
+        <PackageVersion>5.0.0</PackageVersion>
         <Title>DotSimpleValidation</Title>
         <Authors>IndexOverflow</Authors>
         <Description>Super simple validation lib for C#</Description>
@@ -14,6 +14,6 @@
         <RepositoryUrl>https://github.com/IndexOverflow/DotSimpleValidation</RepositoryUrl>
     </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+      <PackageReference Include="System.Collections.Immutable" Version="7.0.0" />
     </ItemGroup>
 </Project>
